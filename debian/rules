@@ -1,0 +1,24 @@
+#!/usr/bin/make -f
+
+include /usr/share/dpkg/pkg-info.mk
+
+export GOARCH = $(DEB_HOST_ARCH_CPU)
+export GOOS = $(DEB_HOST_ARCH_OS)
+export GOCACHE = $(CURDIR)/debian/.go-cache
+
+%:
+	dh $@ --buildsystem=none
+
+override_dh_auto_build:
+	go build -v -trimpath -ldflags="-X 'github.com/docker/machine/version.Version=$(DEB_VERSION)'" -o debian/.go-build/docker-machine ./cmd/docker-machine
+
+# Tests are broken
+override_dh_auto_test:
+	:
+
+override_dh_auto_clean:
+	go clean
+
+# Should be disabled by default and breaks (https://bugs.debian.org/1016563)
+override_dh_dwz:
+	:
