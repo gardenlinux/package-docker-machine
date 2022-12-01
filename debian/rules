@@ -6,6 +6,13 @@ export GOARCH = $(DEB_HOST_ARCH_CPU)
 export GOOS = $(DEB_HOST_ARCH_OS)
 export GOCACHE = $(CURDIR)/debian/.go-cache
 
+source:
+	# docker-machine is not yet a module, just force it to be
+	go mod init github.com/docker/machine
+	go mod tidy -e
+	# vendor all modules so we have a self-contained source
+	go mod vendor
+
 %:
 	dh $@ --buildsystem=none
 
