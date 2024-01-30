@@ -1,8 +1,0 @@
-include:
-  project: gardenlinux/gardenlinux-package-build
-  file: pipeline/pipeline-git.yml
-
-variables:
-  SOURCE_NAME: docker-machine
-  SOURCE_REPO: https://gitlab.com/gitlab-org/docker-machine.git
-  SOURCE_APT_INSTALL: golang-go
