@@ -2,3 +2,4 @@ git_src --branch v0.16.2-gitlab.23 https://gitlab.com/gitlab-org/docker-machine.
 import_src src
 pkg=docker-machine
 version=0.16.2+gitlab.23-0
+version_suffix=gardenlinux0
